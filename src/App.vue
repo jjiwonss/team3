@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-main>
+      <Splash :isLoading="isLoading" />
+      <router-view v-if="!isLoading" />
+    </v-main>
+    <MyFooter />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MyFooter from "./components/BottomMenu.vue";
+import Splash from "./components/Splash.vue"; //로드
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    MyFooter,
+    Splash,
+  },
+
+  data: () => ({
+    //
+    isLoading: true,
+  }),
+
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2500);
+  },
+};
+</script>
